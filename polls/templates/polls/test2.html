@@ -1,0 +1,39 @@
+
+{%extends 'polls/base.html' %}
+
+{%block title %} Test des préférences-Partie 1 {%endblock title %}
+
+
+{% block content %}
+{% if Fini %} <p>Vos réponses sont enregistrées, merci de votre participation ! </p>
+<a href=/polls/accueil>Retour à l'accueil</a>
+{% else %}
+{% if send %}Enregistré!
+<a href={{id_image }}>Suite du test</a>
+{%else %}
+<form action="{% url "test_image" id_image=id_image %}" method="post">
+
+    {% csrf_token %}
+
+    {{ form.as_p }}
+
+    <input type="submit" value="OK" />
+
+</form>
+
+
+
+
+{% endif %}
+{% endif %}
+
+{% endblock content %}
+{%block content2 %}
+{% if  not Fini %}
+<p>Vous avez répondu à {{ progression }}  des questions</p>
+<div class="progress progress-striped active">
+
+  <div class="progress-bar" style="width :{{progression}}"></div>
+</div>
+{%endif%}
+{%endblock content2 %}

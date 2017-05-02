@@ -1,0 +1,54 @@
+header{
+	background-image : url("fruit.jpg");
+	background-position : relative;
+	top : -20 px;
+
+}
+
+.Titre_tete{
+	color : black ;
+	margin-top : 0;
+	
+}
+
+body {
+	background-color : #FAEAB7;
+	font-family: 'Trebuchet MS', Arial, sans-serif;
+	color :#020D0C;
+	
+}
+
+#bloc-page{
+	width : 100%;
+	margin : 0 ;
+	padding :0;
+}
+
+nav ul
+{
+    list-style-type: none;
+    display: flex;
+}
+
+
+nav li
+{
+    margin-right: 15px;
+}
+
+section {
+	display:flex;
+}
+
+nav a{
+    font-size: 1.3em;
+    color: #020D0C;
+    padding-bottom: 3px;
+    text-decoration: none;
+}
+
+
+nav a:hover{
+    color: #760001;
+    border-bottom: 3px solid #760001;
+}

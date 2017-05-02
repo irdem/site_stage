@@ -1,0 +1,33 @@
+{%extends 'polls/base.html' %}
+
+
+{%block content %}
+					<div class="container" id="main">
+
+						<!-- Content -->
+							<article id="content">
+								<header>
+									<h2>Bienvenue sur le site de test des préférences</h2>
+								</header>
+								<p> Le test que vous allez faire est un test de préférences alimentaires. Différents aliments ou plats vont vous être proposés, à chaque fois choisissez sans réfléchir celui que vous préféreriez manger en cet instant.
+								</p>
+								<p>
+								Pour participer, vous devez vous créer un profil utilisateur. Les données récoltées seront traitées de manière anonyme.</p>
+								<p>Des chèques cadeaux d'une valeur de 50 € sont à gagner!
+								Vous pouvez effectuer le test plusieurs fois, cela augmentera vos chances d'être tiré au sort.</p>
+								<p>
+								Le règlement complet du jeu-concours est disponible  <a href=/polls/reglement/ target="_blank">ici</a>
+								</p>
+							</article>
+
+						<div class="row features">
+							<section class="4u 12u(narrower) feature">
+								<ul class="actions">
+									<li><a href="/polls/test1/" class="button">Commencer le test</a></li>
+								</ul>
+							</section>
+							<!--beaucoup de suppression ici -->
+						</div>
+					</div>
+
+{%endblock%}}

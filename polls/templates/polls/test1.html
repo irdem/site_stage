@@ -1,0 +1,49 @@
+{%extends 'polls/base.html' %}
+
+{%block title %} Test des préférences-Partie 1 {%endblock title %}
+
+{% block content %}
+{% if request.user.is_authenticated %}
+
+
+	{% if send %}<p>Enregistré!</p>
+		<a href="/polls/test2/01">Suite du test</a>
+
+	{%elif duree %}
+		<p>Avant de commencer, répondez à quelques 
+		questions décrivant votre ressenti actuel.
+		Pour répondre, évaluez votre état en déplaçant le curseur sur l’échelle affichée sous la question. </p>
+		<form action="{% url "test_nutri" %}" method="post">
+
+			{% csrf_token %}
+
+			{{ form.as_p }}
+
+			<input type="submit" value="OK" />
+
+		</form>
+	{% else %}
+		<p>Vous avez effectué le test il y a moins de 24 heure, merci de revenir plus tard !</p>
+		<a href="/polls">Retour à l'accueil</a>
+
+	{% endif %}
+{% else %}
+ 
+	<P> Veuillez vous identifier ou créer un compte ! </p>
+							<div class="row features">
+								<section class="4u 12u(narrower) feature">
+									<ul class="actions">
+										<li><a href="/polls/inscription" class="button">S'inscrire</a></li>
+									</ul>
+								</section>
+								<section class="4u 12u(narrower) feature">
+									<ul class="actions">
+										<li><a href="/polls/connexion" class="button">Se connecter</a></li>
+									</ul>
+								</section>
+								<!--beaucoup de suppression ici -->
+							</div>
+
+{%endif%}
+
+{% endblock content %}

@@ -1,0 +1,26 @@
+{%extends 'polls/base.html' %}
+
+{%block title %} Test des préférences-Inscription {%endblock title %}
+{% block content %}
+
+{% if send %}<p>L'inscription a bien été prise en compte!</p>
+							<section class="4u 12u(narrower) feature">
+								<ul class="actions">
+									<li><a href="/polls/test1/" class="button">Commencer le test</a></li>
+								</ul>
+							</section>
+{%else %}
+<h2> Veuillez remplir le formulaire suivant : </h2>
+<p></p>
+<form action="{% url "question_supp" %}" method="post" class="form_ir">
+
+    {% csrf_token %}
+
+    {{ form.as_p }}
+
+    <input type="submit" value="OK" />
+
+</form>
+
+{% endif %}
+{% endblock content %}

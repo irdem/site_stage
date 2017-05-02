@@ -1,0 +1,34 @@
+{%extends 'polls/base.html' %}
+
+{%block title %} Test des préférences-Connexion{%endblock title %}
+{% block content %}
+
+
+{% if error %}
+
+<p>Utilisateur inconnu ou mauvais de mot de passe.</p>
+
+{% endif %}
+
+
+{% if user.is_authenticated %}
+
+<P>Vous êtes connecté, {{ user.username }} ! </p>
+<a href="/polls/">Retour à l'accueil</a>
+
+{% else %}
+
+<form method="post" action="{% url "connexion" %}">
+
+    {% csrf_token %}
+
+    {{ form.as_p }}
+	
+
+    <input type="submit" value="Se connecter" />
+
+</form>
+
+{% endif %}
+
+{% endblock content %}
