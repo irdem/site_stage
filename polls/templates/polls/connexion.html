@@ -1,6 +1,6 @@
 {%extends 'polls/base.html' %}
 
-{%block title %} Test des préférences-Connexion{%endblock title %}
+{%block title %} Choix alimentaires-Connexion{%endblock title %}
 {% block content %}
 
 
@@ -18,7 +18,7 @@
 
 {% else %}
 
-<form method="post" action="{% url "connexion" %}">
+<form method="post" action={% url "connexion" %} >
 
     {% csrf_token %}
 

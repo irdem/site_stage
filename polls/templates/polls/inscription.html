@@ -1,6 +1,6 @@
 {%extends 'polls/base.html' %}
 
-{%block title %} Test des préférences-Inscription {%endblock title %}
+{%block title %} Choix alimentaires-Inscription {%endblock title %}
 {% block content %}
 
 {% if send %}<p>L'inscription a bien été prise en compte!</p>
@@ -10,19 +10,16 @@
 								</ul>
 							</section>
 {%else %}
-<h2> Veuillez remplir le formulaire suivant : </h2>
-<p></p>
-<form action="{% url "inscription" %}" method="post" class="form_ir">
+	<h2> Veuillez remplir le formulaire suivant : </h2>
+	<p></p>
+	<form action="{% url "inscription" %}" method="post" class="form_ir">
 
-    {% csrf_token %}
+		{% csrf_token %}
 
-    {{ form.as_p }}
+		{{ form.as_p }}
 
-    <input type="submit" value="OK" />
+		<input type="submit" value="OK" />
 
-</form>
-<p></p>
-<p>Le règlement est <a href=/polls/reglement/ target="_blank">ici</a> <p>
-
+	</form>
 {% endif %}
 {% endblock content %}

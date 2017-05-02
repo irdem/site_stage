@@ -1,12 +1,24 @@
 
 {%extends 'polls/base.html' %}
 
-{%block title %} Test des préférences-Partie 1 {%endblock title %}
+{%block title %} Choix alimentaires-Partie 1 {%endblock title %}
 
 
 {% block content %}
 {% if Fini %} <p>Vos réponses sont enregistrées, merci de votre participation ! </p>
 <a href=/polls/accueil>Retour à l'accueil</a>
+	{% if  not Fini2%}
+		<form action="{% url "test_image" id_image=id_image %}" method="post">
+
+			{% csrf_token %}
+
+			{{ form2.as_p }}
+
+			<input type="submit" value="OK" />
+
+		</form>
+	{% endif%}
+	
 {% else %}
 {% if send %}Enregistré!
 <a href={{id_image }}>Suite du test</a>

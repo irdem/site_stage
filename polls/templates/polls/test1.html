@@ -1,20 +1,25 @@
 {%extends 'polls/base.html' %}
 
-{%block title %} Test des préférences-Partie 1 {%endblock title %}
+{%block title %} Choix alimentaires-Partie 1 {%endblock title %}
 
 {% block content %}
 {% if request.user.is_authenticated %}
 
 
-	{% if send %}<p>Enregistré!</p>
+	{% if send %}
+		<p>Enregistré!</p>
+		<p style="color:#000F93; font-weight:bold">Dans la suite du test, vous allez devoir faire des choix d'aliments. A chaque fois, choisissez le plus honnêtement possible l'aliment que vous aimeriez le plus manger maintenant.
+		Essayez de répondre le plus honnêtement possible, vous n'êtes pas obligés de remplir le questionnaire jusqu'au bout. Si vous souhaitez être pris en compte pour le concours, vous êtes cependant tenus de répondre
+		au minimum à 75% des questions.
+		</p>
 		<a href="/polls/test2/01">Suite du test</a>
 
 	{%elif duree %}
 		<p>Avant de commencer, répondez à quelques 
 		questions décrivant votre ressenti actuel.
-		Pour répondre, évaluez votre état en déplaçant le curseur sur l’échelle affichée sous la question. </p>
+		Pour répondre, évaluez votre état en déplaçant le curseur sur l’échelle affichée sous la question.</p>
 		<form action="{% url "test_nutri" %}" method="post">
-
+		
 			{% csrf_token %}
 
 			{{ form.as_p }}
@@ -23,7 +28,7 @@
 
 		</form>
 	{% else %}
-		<p>Vous avez effectué le test il y a moins de 24 heure, merci de revenir plus tard !</p>
+		<p>Vous avez effectué le test il y a moins de 4 heures, merci de revenir plus tard !</p>
 		<a href="/polls">Retour à l'accueil</a>
 
 	{% endif %}

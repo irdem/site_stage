@@ -9,6 +9,7 @@ from django import forms
 from django.contrib.auth.models import User
 import floppyforms
 from suit.widgets import SuitTimeWidget
+from .models import Commentaire
 
 
 
@@ -34,7 +35,7 @@ class Slider(floppyforms.RangeInput):
 
     
 class etat_nutri_form(floppyforms.Form):
-    faim=floppyforms.IntegerField(widget=Slider, label = "Avez-vous faim ? ")
+    faim=floppyforms.IntegerField(widget=Slider, label = "Avez-vous faim ? ", help_text ="Echelle : de 'pas du tout' (gauche) à 'extrèmement'  (droite )")
     def clean_faim(self):
         faim = self.cleaned_data['faim']
         if not 0 <= faim <= 100:
@@ -42,7 +43,7 @@ class etat_nutri_form(floppyforms.Form):
 
         return faim
     
-    soif=floppyforms.IntegerField(widget=Slider, label = "Avez-vous soif ? ")
+    soif=floppyforms.IntegerField(widget=Slider, label = "Avez-vous soif ? ",help_text ="Echelle : de 'pas du tout' (gauche) à 'extrèmement'  (droite )")
     def clean_soif(self):
         soif = self.cleaned_data['soif']
         if not 0 <= soif <= 100:
@@ -50,18 +51,19 @@ class etat_nutri_form(floppyforms.Form):
 
         return soif
     
-    sensation_estomac= floppyforms.IntegerField(widget=Slider, label = "Avez-vous la sensation d'avoir l'estomac rempli ? ")
-    plaisir_manger =floppyforms.IntegerField(widget=Slider, label = "Eprouveriez du plaisir à manger maintenant ? ")
-    plaisir_boire =floppyforms.IntegerField(widget=Slider, label = "Eprouveriez du plaisir à boire maintenant ? ")
-    quantite_manger =floppyforms.IntegerField(widget=Slider, label = "Quelle quantité seriez-vous capable de manger en ce moment ? ")
-    quantite_boire =floppyforms.IntegerField(widget=Slider, label = "Quelle quantité seriez-vous capable de boire en ce moment ? ")
+    sensation_estomac= floppyforms.IntegerField(widget=Slider, label = "Avez-vous la sensation d'avoir l'estomac rempli ? ",help_text ="Echelle :  de 'pas du tout' (gauche) à 'extrèmement'  (droite )")
+    plaisir_manger =floppyforms.IntegerField(widget=Slider, label = "Eprouveriez du plaisir à manger maintenant ? ",help_text ="Echelle : de 'pas du tout' (gauche) à 'extrèmement'  (droite )")
+    plaisir_boire =floppyforms.IntegerField(widget=Slider, label = "Eprouveriez du plaisir à boire maintenant ? ",help_text ="Echelle : de 'pas du tout' (gauche) à 'extrèmement'  (droite )")
+    quantite_manger =floppyforms.IntegerField(widget=Slider, label = "Quelle quantité seriez-vous capable de manger en ce moment ? ",help_text ="Echelle :  de 'pas du tout' (gauche) à 'énormément' (droite )")
+    quantite_boire =floppyforms.IntegerField(widget=Slider, label = "Quelle quantité seriez-vous capable de boire en ce moment ? ",help_text ="Echelle :  de 'pas du tout' (gauche) à 'énormément' (droite )")
 
-    choix=[("00:15","00:15"),("00:30","00:30"),("00:45","00:45"),("01:00","01:00"),("01:30","01:30"),
-           ("02:00","02:30"),("03:00","03:00"),("03:30","03:30"),("04:00","04:00"),("04:30","04:30"),
-           ("05:00","05:00"),("06:00","06:00"),("07:00","07:00"),("08:00","08:00"),("09:00","09:00"),
-           ("10:00","10:00"),("11:00","11:00"),("12:00","12:00")]
-    heure_dernier_repas =floppyforms.ChoiceField(choices=choix,label="A combien de temps remonte votre dernier repas (hors snack)-format hh:mm ?")
-    heure_derniere_prise =floppyforms.ChoiceField(choices=choix,label="A combien de temps remonte votre dernière prise alimentaire (snack compris)-format hh:mm?")
+    choix=[("00:15","moins de 15 min"),("00:30","entre 15 et 30 min"),("00:45","45 min")
+    ,("01:00","1 heure"),("01:30","1h30"),
+           ("02:00","2h"),("02:30","2h30"),("03:00","3h"),("03:30","3h30"),("04:00","4h"),("04:30","4h30"),
+           ("05:00","5h"),("06:00","6h00"),("07:00","7h"),("08:00","8h"),("09:00","9h"),
+           ("10:00","10h"),("11:00","11h"),("12:00","12h ou plus")]
+    heure_dernier_repas =floppyforms.ChoiceField(choices=choix,label="A combien de temps remonte votre dernier repas (hors snack)?")
+    heure_derniere_prise =floppyforms.ChoiceField(choices=choix,label="A combien de temps remonte votre dernière prise alimentaire (snack compris)?")
     
     Choices = [("petit-dej","petit-dejeuner"),("dej","déjeuner"),("snack","goûter/snack/collation"),("diner","diner")]
     prochain_repas = floppyforms.ChoiceField(widget= floppyforms.RadioSelect(), choices=Choices, label = "Quel est le prochain repas que vous pensez prendre ?")
@@ -88,8 +90,8 @@ class inscription_form(forms.Form):
     Sexe = forms.ChoiceField (choices=Choices, widget= forms.RadioSelect())
     Age = forms.IntegerField(min_value=1, max_value=120)
     Poids = forms.IntegerField(min_value=0,max_value=200)
-    Taille_metre = forms.DecimalField(label='Taille en mètre',min_value=0, max_value=2.30,max_digits=3)
-    Nb_enfants = forms.IntegerField(label="Combien d'enfants avez-vous ?",min_value=0)
+    Taille_centimetre = forms.IntegerField(label='Taille en centimètres',min_value=0, max_value=230)
+    Nb_enfants = forms.IntegerField(label="Combien d'enfants avez-vous ?",min_value=0,max_value=20)
     Choices = [("Faible","Moins d'une heure par semaine "),( "Moyenne","Une à trois heures par semaine"),
                 ("Forte","Plus de quatre heures par semaine")]
     Sport = forms.ChoiceField(choices =Choices, widget=forms.RadioSelect(),
@@ -124,7 +126,7 @@ class inscription_form(forms.Form):
     , choices=choix
     ,label='A quelle fréquence vous arrive-t-il de consommer des boissons alcoolisées ( vin, bière, cidre ou autre alcool) ?')
     
-    reglement= forms.BooleanField(label="Je reconnais avoir pris connaissance du règlement et l'accepte ", required=True)
+    reglement= forms.BooleanField(label="Je reconnais avoir pris connaissance du règlement et l'accepte ",help_text='<p>Le règlement est <a href=/polls/reglement/ target="_blank">ici</a> <p>', required=True)
     
     def clean_Pseudo(self):
         Pseudo=self.cleaned_data['Pseudo']
@@ -194,5 +196,13 @@ class questions_sup(forms.Form):
     enceinte=forms.BooleanField(label="Etes-vous enceinte ?",required=False)
     allaite=forms.BooleanField(label="Allaitez-vous actuellement ?",required=False)
 
+class commentaire(forms.ModelForm):
+    class Meta :
+        model=Commentaire
+        fields=('commentaire',)
+        
+    
 
     
+
+

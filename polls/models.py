@@ -8,7 +8,7 @@ class Utilisateurs(models.Model):
     Nom_utilisateur=models.OneToOneField(User)
     Age = models.PositiveIntegerField()
     Poids = models.PositiveIntegerField()
-    Taille_metre = models.DecimalField(decimal_places=2,max_digits=3)
+    Taille_centimetre = models.PositiveIntegerField(default=0)
     Sport = models.CharField(max_length=100,default="Unknown")
     Vegetarien = models.BooleanField(default=False)
     Vegan = models.BooleanField(default=False)
@@ -85,12 +85,17 @@ class Preference(models.Model):
     aliment_prefere=models.CharField(max_length=100)
     aliment_non_prefere=models.CharField(max_length=100)
     id_Test= models.ForeignKey(Test, on_delete=models.CASCADE)
+    heure=models.DateTimeField(default=timezone.now)
+
+class Commentaire(models.Model):
+    Test=models.ForeignKey(Test, on_delete=models.CASCADE)
+    commentaire=models.TextField(help_text='Vous pouvez insérer un commentaire si vous le souhaitez')
 
     
 class Aliment(models.Model):
     nom_aliment=models.CharField(max_length=100, primary_key=True)
     description=models.TextField()
-    groupe=models.DecimalField(default=0)
+    groupe=models.CharField(max_length=100,default='none')
     
     def __str__(self):
 

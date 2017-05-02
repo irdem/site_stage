@@ -4,8 +4,8 @@ from django.shortcuts import render
 from django.http import HttpResponse,Http404
 from django.shortcuts import redirect
 from django.template import loader
-from .forms import inscription_form, ConnexionForm,etat_nutri_form, test_aliment_form, questions_sup
-from .models import Utilisateurs, Test, Aliment, Preference
+from .forms import inscription_form, ConnexionForm,etat_nutri_form, test_aliment_form, questions_sup,commentaire
+from .models import Utilisateurs, Test, Aliment, Preference, Commentaire
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
 from django.contrib.auth import logout
@@ -22,8 +22,10 @@ class choix_alea () :
         
     def rempli(self):
         self.choix=[]
-        for i in range(20):
+        for i in range(18):
             self.choix.append(Aliment.select_choix(Aliment))
+        self.choix.append(self.choix[1])
+        self.choix.append(self.choix[0])
     
     def set_test(self,id_test):
         self.test=id_test;
@@ -69,7 +71,7 @@ def inscription(request):
         Email = form.cleaned_data['Email']
         Age = form.cleaned_data['Age']
         Poids = form.cleaned_data['Poids']
-        Taille_metre = form.cleaned_data['Taille_metre']
+        Taille_centimetre = form.cleaned_data['Taille_centimetre']
         Code_postal=form.cleaned_data['Code_postal']
         Sexe=form.cleaned_data['Sexe']
         Nb_enfants=form.cleaned_data['Nb_enfants']
@@ -97,7 +99,7 @@ def inscription(request):
         user=User.objects.create_user(pseudo,Email,Mdp)
         
         Utilisateurs.objects.create(Nom_utilisateur=user
-            ,Age=Age,Poids=Poids,Taille_metre=Taille_metre,Sport=Sport,
+            ,Age=Age,Poids=Poids,Taille_centimetre=Taille_centimetre,Sport=Sport,
             Regime_raison=Regime_raison,Sexe=Sexe, Nb_enfants=Nb_enfants,
             Fumeur=Fumeur,Consommation_alcool=alcool
             ,Niveau_etudes=Niveau_etudes,Code_postal=Code_postal,
@@ -123,7 +125,8 @@ def etat_nutri(request):
     try :
         dernier=Test.objects.filter(id_utilisateur__Nom_utilisateur__username__exact=user_name)
         dernier_test=dernier[len(dernier)-1].date_test
-        if (dernier_test-time).days<1:
+        diff=time-dernier_test
+        if diff.seconds<14400 and diff.days<1:
             duree=False
         else:
             duree =True   
@@ -166,6 +169,14 @@ def test_image(request,id_image):
         Reponse=redirect(accueil)
     if int(id_image)>20 :
         Fini=True
+        form2=commentaire(request.POST or None)
+        if form2.is_valid():
+            comment=form2.cleaned_data['commentaire']
+            Fini2=True
+            if request.user.is_authenticated():
+                Commentaire.objects.create(Test=liste_choix.test,commentaire=comment)
+            
+            
         Reponse =render(request,'polls/test2.html',locals())
     else :
         if liste_choix.choix==[]:

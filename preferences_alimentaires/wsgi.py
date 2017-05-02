@@ -1,5 +1,5 @@
 """
-WSGI config for site_collecte project.
+WSGI config for preferences_alimentaires project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 
@@ -11,6 +11,6 @@ import os
 
 from django.core.wsgi import get_wsgi_application
 
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "site_collecte.settings")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "preferences_alimentaires.settings")
 
 application = get_wsgi_application()

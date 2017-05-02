@@ -1596,11 +1596,13 @@
 		font-size: 2em;
 		line-height: 1.25em;
 	}
+	
 
 	h3 {
 		font-size: 1.5em;
 		line-height: 1.5em;
 	}
+	
 
 	a {
 		-moz-transition: color 0.25s ease-in-out, border-color 0.25s ease-in-out, background-color 0.25s ease-in-out;
@@ -2003,7 +2005,7 @@
 		position: relative;
 		background: #fff;
 		overflow-x: hidden;
-		padding: 4em 5% 2em 10%;
+		padding: 4em 10% 2em 10%;
 
 	}
 

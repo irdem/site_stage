@@ -1,4 +1,4 @@
-"""site_collecte URL Configuration
+"""preferences_alimentaires URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/1.10/topics/http/urls/
@@ -19,5 +19,6 @@ from django.contrib import admin
 
 urlpatterns = [
     url(r'^polls/', include('polls.urls')),
+    url(r'^',include('polls.urls')),
     url(r'^admin/', admin.site.urls),
 ]
