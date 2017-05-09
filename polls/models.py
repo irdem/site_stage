@@ -6,9 +6,9 @@ from  random import randint
 
 class Utilisateurs(models.Model):
     Nom_utilisateur=models.OneToOneField(User)
-    Age = models.PositiveIntegerField(default=0)
-    Poids = models.PositiveIntegerField(default=0)
-    Taille_centimetre = models.PositiveIntegerField(default=0)
+    Age = models.IntegerField(default=0)
+    Poids = models.IntegerField(default=0)
+    Taille_centimetre = models.IntegerField(default=0)
     Sport = models.CharField(max_length=100,default="Unknown")
     Vegetarien = models.BooleanField(default=False)
     Vegan = models.BooleanField(default=False)

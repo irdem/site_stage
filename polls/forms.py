@@ -140,17 +140,6 @@ class inscription_form(forms.Form):
             raise forms.ValidationError("Cet email est déjà enregistré...")
         return Email
         
-    def clean_Age(self):
-        Age=self.cleaned_data['Age']
-        if Age<=0:
-            raise forms.ValidationError("Merci d'entrer un nombre positif")
-        return Age
-    
-    def clean_Poids(self):
-        Poids=self.cleaned_data['Poids']
-        if Poids<=0:
-            raise forms.ValidationError("Merci d'entrer un nombre positif")
-        return Poids
     
     def clean_Code_postal(self):
         Code_postal=self.cleaned_data['Code_postal']
