@@ -88,9 +88,9 @@ class inscription_form(forms.Form):
 
     Choices = [("F",'Femme'),("H",'Homme')]
     Sexe = forms.ChoiceField (choices=Choices, widget= forms.RadioSelect())
-    Age = forms.IntegerField(min_value=1, max_value=120)
-    Poids = forms.IntegerField(min_value=0,max_value=200)
-    Taille_centimetre = forms.IntegerField(label='Taille en centimètres',min_value=0, max_value=230)
+    Age = forms.IntegerField(min_value=1, max_value=120,required=False)
+    Poids = forms.IntegerField(min_value=0,max_value=200,required=False)
+    Taille_centimetre = forms.IntegerField(label='Taille en centimètres',min_value=0, max_value=230,required=False)
     Nb_enfants = forms.IntegerField(label="Combien d'enfants avez-vous ?",min_value=0,max_value=20)
     Choices = [("Faible","Moins d'une heure par semaine "),( "Moyenne","Une à trois heures par semaine"),
                 ("Forte","Plus de quatre heures par semaine")]

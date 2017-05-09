@@ -6,8 +6,8 @@ from  random import randint
 
 class Utilisateurs(models.Model):
     Nom_utilisateur=models.OneToOneField(User)
-    Age = models.PositiveIntegerField()
-    Poids = models.PositiveIntegerField()
+    Age = models.PositiveIntegerField(default=0)
+    Poids = models.PositiveIntegerField(default=0)
     Taille_centimetre = models.PositiveIntegerField(default=0)
     Sport = models.CharField(max_length=100,default="Unknown")
     Vegetarien = models.BooleanField(default=False)
