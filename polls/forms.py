@@ -178,7 +178,7 @@ class test_aliment_form(forms.Form):
     
     def __init__(self,choix,*args,**kwargs):
         super(test_aliment_form,self).__init__(*args,**kwargs)
-        self.fields['choix_alim']=forms.ChoiceField(widget=forms.RadioSelect(), choices=choix,label="Choisissez l'aliment que vous souhaitez manger")
+        self.fields['choix_alim']=forms.ChoiceField(widget=forms.RadioSelect(), choices=choix,label="Lequel de ces 2 aliments souhaiteriez vous plus consommer maintenant?")
         
 
 class questions_sup(forms.Form):
